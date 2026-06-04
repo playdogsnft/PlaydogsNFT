@@ -979,9 +979,192 @@
             padding: 14px 24px;
             font-size: 0.95rem;
         }
+
+        /* Promo Countdown Banner */
+        .promo-banner {
+            background: linear-gradient(90deg, var(--accent), var(--pink));
+            color: #ffffff;
+            padding: 10px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 10001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-family: var(--font-heading);
+            letter-spacing: 0.02em;
+        }
+        .promo-banner a {
+            color: #ffffff;
+            text-decoration: underline;
+            margin-left: 4px;
+            font-weight: 700;
+            transition: opacity 0.2s;
+        }
+        .promo-banner a:hover { opacity: 0.85; }
+        .countdown-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            background: rgba(0,0,0,0.25);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .nav {
+            top: 38px !important;
+        }
+        @media (max-width: 768px) {
+            .promo-banner { font-size: 0.72rem; padding: 8px 12px; gap: 8px; }
+            .nav { top: 52px !important; }
+        }
+
+        /* Giveaway Section */
+        .giveaway-sec {
+            padding: 80px 0;
+        }
+        .giveaway-card {
+            display: flex;
+            background: linear-gradient(135deg, var(--bg-card), rgba(99,102,241,0.04));
+            border: 1px solid var(--border-hover);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+        @media (max-width: 768px) {
+            .giveaway-card { flex-direction: column; }
+        }
+        .giveaway-left {
+            flex: 1.2;
+            padding: 48px;
+        }
+        .giveaway-right {
+            flex: 0.8;
+            background: rgba(255,255,255,0.01);
+            border-left: 1px solid var(--border);
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        @media (max-width: 768px) {
+            .giveaway-right { border-left: none; border-top: 1px solid var(--border); padding: 36px 24px; }
+            .giveaway-left { padding: 36px 24px; }
+        }
+        .giveaway-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            margin: 8px 0 16px;
+            letter-spacing: -0.02em;
+        }
+        .giveaway-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        .giveaway-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .giveaway-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .step-num {
+            width: 32px; height: 32px;
+            background: rgba(99,102,241,0.1);
+            border: 1px solid var(--border-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--accent-light);
+            flex-shrink: 0;
+        }
+        .step-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .step-text a {
+            color: var(--accent-light);
+            text-decoration: underline;
+        }
+        .form-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+        }
+        .giveaway-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .input-group input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            color: var(--text);
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .input-group input:focus {
+            border-color: var(--accent-light);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+        }
+        .submit-btn {
+            padding: 14px 24px;
+            width: 100%;
+            justify-content: center;
+        }
+        .form-message {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            text-align: center;
+            border-radius: var(--radius-sm);
+            transition: all 0.3s;
+        }
+        .form-message.success {
+            padding: 10px;
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.2);
+            color: var(--green);
+        }
     </style>
 </head>
 <body>
+
+    <!-- ===== PROMO COUNTDOWN BANNER ===== -->
+    <div class="promo-banner" id="promo-banner">
+        <span>🎁 <strong>500 NFT Giveaway!</strong> Apply now to secure a free mint: <a href="#giveaway">Join Giveaway</a></span>
+        <span class="countdown-container">
+            🚀 Launch: <span id="countdown-timer">30d 00h 00m 00s</span>
+        </span>
+    </div>
 
     <!-- ===== NAVIGATION ===== -->
     <nav class="nav" id="navbar">
@@ -1053,6 +1236,47 @@
             </div>
         </div>
     </div>
+
+    <!-- ===== GIVEAWAY SECTION ===== -->
+    <section id="giveaway" class="giveaway-sec reveal">
+        <div class="container">
+            <div class="giveaway-card">
+                <div class="giveaway-left">
+                    <div class="section-label">Exclusive Launch Event</div>
+                    <h2 class="giveaway-title">500 Free NFT Giveaway!</h2>
+                    <p class="giveaway-desc">
+                        We are distributing 500 unique PlayDogs for free to early supporters. Complete these 3 quick tasks to secure your allowlist entry:
+                    </p>
+                    <div class="giveaway-steps">
+                        <div class="giveaway-step">
+                            <div class="step-num">1</div>
+                            <div class="step-text">Follow <a href="#" target="_blank">@PlayDogsNFT</a> on Twitter / X</div>
+                        </div>
+                        <div class="giveaway-step">
+                            <div class="step-num">2</div>
+                            <div class="step-text">Like and Retweet our pinned Giveaway Post</div>
+                        </div>
+                        <div class="giveaway-step">
+                            <div class="step-num">3</div>
+                            <div class="step-text">Submit your Ethereum wallet address below</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="giveaway-right">
+                    <div class="form-title">Enter Wallet Address</div>
+                    <form id="giveaway-form" class="giveaway-form">
+                        <div class="input-group">
+                            <input type="text" id="wallet-address" placeholder="0x..." required pattern="^0x[a-fA-F0-9]{40}$" title="Please enter a valid Ethereum address starting with 0x (40 hex characters)">
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            <i class="fa-solid fa-paper-plane"></i> Apply for Giveaway
+                        </button>
+                    </form>
+                    <div id="form-message" class="form-message"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ===== ABOUT ===== -->
     <section id="about">
@@ -1546,6 +1770,52 @@
         document.getElementById("load-more-btn").addEventListener("click", renderBatch);
 
 
+
+        // --- Countdown Timer ---
+        const countdownTimer = document.getElementById("countdown-timer");
+        const launchDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from load
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            if (distance < 0) {
+                countdownTimer.innerText = "MINT IS LIVE!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Format double digits
+            const d = days;
+            const h = hours.toString().padStart(2, '0');
+            const m = minutes.toString().padStart(2, '0');
+            const s = seconds.toString().padStart(2, '0');
+
+            countdownTimer.innerText = `${d}d ${h}h ${m}m ${s}s`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- Giveaway Form Submission ---
+        const giveawayForm = document.getElementById("giveaway-form");
+        const formMessage = document.getElementById("form-message");
+
+        giveawayForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            formMessage.innerText = "Verifying wallet...";
+            formMessage.className = "form-message";
+
+            setTimeout(() => {
+                formMessage.innerText = "🎉 Wallet Submitted! Complete steps 1 & 2 on Twitter/X to qualify.";
+                formMessage.className = "form-message success";
+                giveawayForm.reset();
+            }, 1000);
+        });
 
         // --- FAQ Accordion ---
         document.querySelectorAll(".faq-item").forEach(item => {
