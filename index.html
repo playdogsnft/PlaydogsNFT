@@ -11,7 +11,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="PlayDogs — 10,000 Unique Pixel Dog NFTs">
     <meta property="og:description" content="Collect one of 10,000 unique procedurally generated pixel art dogs on Ethereum. 20 breeds, 5 skin styles, and 30+ accessories.">
-    <meta property="og:image" content="build/images/1.png">
+    <meta property="og:image" content="logo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PlayDogs — 10,000 Unique Pixel Dog NFTs">
     <meta name="twitter:description" content="Retro pixel art dogs on Ethereum. 20 breeds, 5 skins, 30+ accessories.">
@@ -1372,8 +1372,40 @@
             { edition: 21, breed: "German Shepherd", skin: "Zombie" },
             { edition: 22, breed: "Bulldog", skin: "Normal" },
             { edition: 23, breed: "Samoyed", skin: "Normal" },
-            { edition: 24, breed: "Pug", skin: "Normal" }
+            { edition: 24, breed: "Pug", skin: "Normal" },
+            // Showcase specific editions
+            { edition: 42, breed: "German Shepherd", skin: "Normal" },
+            { edition: 99, breed: "Husky", skin: "Normal" },
+            { edition: 256, breed: "Pug", skin: "Normal" },
+            { edition: 420, breed: "Pug", skin: "Normal" },
+            { edition: 500, breed: "Cane Corso", skin: "Robot" },
+            { edition: 777, breed: "Pitbull", skin: "Normal" },
+            { edition: 1001, breed: "Husky", skin: "Normal" },
+            { edition: 2500, breed: "German Shepherd", skin: "Normal" },
+            { edition: 5078, breed: "Bulldog", skin: "Gold" },
+            { edition: 7777, breed: "Chihuahua", skin: "Normal" }
         ];
+
+        const breedsList = [
+            "Shiba Inu", "Doberman", "Beagle", "German Shepherd", "Golden Retriever",
+            "Great Dane", "Samoyed", "Labrador", "Rottweiler", "Pomeranian", 
+            "Corgi", "Husky", "Bulldog", "Pug", "Akita", "Chihuahua", 
+            "Cane Corso", "Border Collie", "Dalmatian", "Pitbull"
+        ];
+        const skinsList = ["Normal", "Normal", "Normal", "Normal", "Gold", "Zombie", "Alien", "Robot"];
+
+        function getDeterministicTraits(id) {
+            const match = fallbackMetadata.find(x => x.edition === id);
+            if (match) {
+                return { breed: match.breed, skin: match.skin };
+            }
+            const breedIndex = (id * 17) % breedsList.length;
+            const skinIndex = (id * 31) % skinsList.length;
+            return {
+                breed: breedsList[breedIndex],
+                skin: skinsList[skinIndex]
+            };
+        }
 
         // --- Detail Modal Logic ---
         const detailModal = document.getElementById("detail-modal");
@@ -1399,26 +1431,15 @@
                     }
                 });
             } else {
-                const match = fallbackMetadata.find(x => x.edition === editionId);
-                if (match) {
-                    breedVal = match.breed;
-                    skinVal = match.skin;
-                }
-                // Custom overrides for specific cards if clicked in other sections
+                const traits = getDeterministicTraits(editionId);
+                breedVal = traits.breed;
+                skinVal = traits.skin;
                 if (editionId === 5078) {
-                    breedVal = "Bulldog";
-                    skinVal = "Gold";
                     traitsList = [
                         { trait_type: "Background", value: "Cyan-Blue Gradient" },
                         { trait_type: "Hat", value: "Gold Crown" },
                         { trait_type: "Eyes", value: "Black Sunglasses" }
                     ];
-                } else if (editionId === 42) {
-                    breedVal = "Husky";
-                    skinVal = "Normal";
-                } else if (editionId === 99) {
-                    breedVal = "Shiba Inu";
-                    skinVal = "Normal";
                 }
             }
 
