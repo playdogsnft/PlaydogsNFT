@@ -824,6 +824,160 @@
             word-break: break-all;
             margin-top: 16px;
         }
+
+        /* Detail Modal */
+        .modal-backdrop {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            padding: 20px;
+        }
+        .modal-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-hover);
+            border-radius: var(--radius);
+            max-width: 780px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+        @keyframes modalSlide {
+            from { transform: translateY(24px) scale(0.98); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px; right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 10;
+        }
+        .modal-close:hover { color: var(--text); }
+        .modal-content {
+            display: flex;
+            flex-direction: row;
+        }
+        @media (max-width: 680px) {
+            .modal-content { flex-direction: column; }
+            .modal-left { border-right: none !important; border-bottom: 1px solid var(--border); }
+        }
+        .modal-left {
+            flex: 1;
+            background: var(--bg-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border-right: 1px solid var(--border);
+        }
+        .modal-left img {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .modal-right {
+            flex: 1.2;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .modal-right h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+        }
+        .modal-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .modal-meta-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .meta-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+        }
+        .meta-val {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .modal-traits-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 8px;
+            margin-bottom: 32px;
+            max-height: 140px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .modal-traits-container::-webkit-scrollbar { width: 4px; }
+        .modal-traits-container::-webkit-scrollbar-track { background: transparent; }
+        .modal-traits-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        .modal-traits-container::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        .trait-badge {
+            background: rgba(99,102,241,0.06);
+            border: 1px solid rgba(99,102,241,0.15);
+            border-radius: 4px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .trait-type {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-light);
+        }
+        .trait-value {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .modal-buy-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 14px 24px;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -1097,6 +1251,41 @@
         </div>
     </footer>
 
+    <!-- ===== DETAIL MODAL ===== -->
+    <div id="detail-modal" class="modal-backdrop">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+            <div class="modal-content">
+                <div class="modal-left">
+                    <img id="modal-img" src="" alt="PlayDog Detail" style="image-rendering: pixelated;">
+                </div>
+                <div class="modal-right">
+                    <h3 id="modal-title">PlayDog #0</h3>
+                    <div class="modal-meta-grid">
+                        <div class="modal-meta-item">
+                            <span class="meta-label">Breed</span>
+                            <span class="meta-val" id="modal-breed">-</span>
+                        </div>
+                        <div class="modal-meta-item">
+                            <span class="meta-label">Skin Style</span>
+                            <span class="meta-val" id="modal-skin">-</span>
+                        </div>
+                        <div class="modal-meta-item">
+                            <span class="meta-label">Price</span>
+                            <span class="meta-val" style="color: var(--green);"><i class="fa-brands fa-ethereum"></i> 5 ETH</span>
+                        </div>
+                    </div>
+                    <div id="modal-traits" class="modal-traits-container">
+                        <!-- Filled by JS with individual trait blocks -->
+                    </div>
+                    <a id="modal-opensea-btn" href="#" target="_blank" class="btn btn-primary modal-buy-btn">
+                        <i class="fa-solid fa-sailboat"></i> Buy on OpenSea
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== JAVASCRIPT ===== -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -1121,6 +1310,9 @@
         heroIds.forEach(id => {
             const card = document.createElement("div");
             card.className = "hero-card";
+            card.style.cursor = "pointer";
+            card.dataset.id = id;
+            card.addEventListener("click", () => openNftDetail(parseInt(card.dataset.id)));
             card.innerHTML = `<img src="build/images/${id}.png" alt="PlayDog #${id}" loading="eager">`;
             heroShowcase.appendChild(card);
         });
@@ -1133,6 +1325,7 @@
             cards.forEach((card, i) => {
                 const newId = ((heroOffset + i) * 137 + 1) % 10000 + 1;
                 card.querySelector("img").src = `build/images/${newId}.png`;
+                card.dataset.id = newId;
             });
         }, 4000);
 
@@ -1142,6 +1335,8 @@
         mosaicIds.forEach((id, i) => {
             const item = document.createElement("div");
             item.className = "mosaic-img" + (i === 0 ? " large" : "");
+            item.style.cursor = "pointer";
+            item.addEventListener("click", () => openNftDetail(id));
             item.innerHTML = `<img src="build/images/${id}.png" alt="PlayDog #${id}" loading="lazy">`;
             mosaic.appendChild(item);
         });
@@ -1151,6 +1346,110 @@
         let allNfts = [];
         let displayCount = 0;
         const BATCH = 12;
+
+        // Fallback metadata list for local preview (CORS workaround)
+        const fallbackMetadata = [
+            { edition: 1, breed: "Shiba Inu", skin: "Normal" },
+            { edition: 2, breed: "Doberman", skin: "Zombie" },
+            { edition: 3, breed: "Beagle", skin: "Normal" },
+            { edition: 4, breed: "German Shepherd", skin: "Normal" },
+            { edition: 5, breed: "Golden Retriever", skin: "Normal" },
+            { edition: 6, breed: "Shiba Inu", skin: "Normal" },
+            { edition: 7, breed: "Great Dane", skin: "Normal" },
+            { edition: 8, breed: "Samoyed", skin: "Normal" },
+            { edition: 9, breed: "Shiba Inu", skin: "Normal" },
+            { edition: 10, breed: "Shiba Inu", skin: "Normal" },
+            { edition: 11, breed: "Golden Retriever", skin: "Normal" },
+            { edition: 12, breed: "Beagle", skin: "Normal" },
+            { edition: 13, breed: "Labrador", skin: "Normal" },
+            { edition: 14, breed: "Rottweiler", skin: "Normal" },
+            { edition: 15, breed: "Pomeranian", skin: "Normal" },
+            { edition: 16, breed: "Corgi", skin: "Gold" },
+            { edition: 17, breed: "Great Dane", skin: "Gold" },
+            { edition: 18, breed: "Rottweiler", skin: "Normal" },
+            { edition: 19, breed: "Husky", skin: "Normal" },
+            { edition: 20, breed: "Great Dane", skin: "Normal" },
+            { edition: 21, breed: "German Shepherd", skin: "Zombie" },
+            { edition: 22, breed: "Bulldog", skin: "Normal" },
+            { edition: 23, breed: "Samoyed", skin: "Normal" },
+            { edition: 24, breed: "Pug", skin: "Normal" }
+        ];
+
+        // --- Detail Modal Logic ---
+        const detailModal = document.getElementById("detail-modal");
+        const modalImg = document.getElementById("modal-img");
+        const modalTitle = document.getElementById("modal-title");
+        const modalBreed = document.getElementById("modal-breed");
+        const modalSkin = document.getElementById("modal-skin");
+        const modalTraits = document.getElementById("modal-traits");
+        const modalOpenseaBtn = document.getElementById("modal-opensea-btn");
+
+        function openNftDetail(editionId) {
+            let nft = allNfts.find(x => (x.edition || x.id) === editionId);
+            let breedVal = "Unknown";
+            let skinVal = "Normal";
+            let traitsList = [];
+
+            if (nft) {
+                (nft.attributes || []).forEach(a => {
+                    if (a.trait_type === "Breed") breedVal = a.value;
+                    else if (a.trait_type === "Skin Style") skinVal = a.value.replace(" (Standard)", "").replace(" Skin", "");
+                    else if (a.trait_type !== "Rarity Class" && a.trait_type !== "Rarity Score") {
+                        traitsList.push(a);
+                    }
+                });
+            } else {
+                const match = fallbackMetadata.find(x => x.edition === editionId);
+                if (match) {
+                    breedVal = match.breed;
+                    skinVal = match.skin;
+                }
+                // Custom overrides for specific cards if clicked in other sections
+                if (editionId === 5078) {
+                    breedVal = "Bulldog";
+                    skinVal = "Gold";
+                    traitsList = [
+                        { trait_type: "Background", value: "Cyan-Blue Gradient" },
+                        { trait_type: "Hat", value: "Gold Crown" },
+                        { trait_type: "Eyes", value: "Black Sunglasses" }
+                    ];
+                } else if (editionId === 42) {
+                    breedVal = "Husky";
+                    skinVal = "Normal";
+                } else if (editionId === 99) {
+                    breedVal = "Shiba Inu";
+                    skinVal = "Normal";
+                }
+            }
+
+            modalImg.src = `build/images/${editionId}.png`;
+            modalTitle.innerText = `PlayDog #${editionId}`;
+            modalBreed.innerText = breedVal;
+            modalSkin.innerText = skinVal;
+            modalOpenseaBtn.href = `https://opensea.io/assets/ethereum/0x0000000000000000000000000000000000000000/${editionId}`;
+
+            modalTraits.innerHTML = "";
+            traitsList.forEach(t => {
+                const badge = document.createElement("div");
+                badge.className = "trait-badge";
+                badge.innerHTML = `
+                    <div class="trait-type">${t.trait_type}</div>
+                    <div class="trait-value" title="${t.value}">${t.value}</div>
+                `;
+                modalTraits.appendChild(badge);
+            });
+
+            detailModal.classList.add("open");
+        }
+
+        document.getElementById("modal-close").addEventListener("click", () => {
+            detailModal.classList.remove("open");
+        });
+        detailModal.addEventListener("click", (e) => {
+            if (e.target === detailModal) {
+                detailModal.classList.remove("open");
+            }
+        });
 
         async function loadMetadata() {
             try {
@@ -1174,13 +1473,15 @@
 
                 const card = document.createElement("div");
                 card.className = "nft-card";
+                card.style.cursor = "pointer";
+                card.addEventListener("click", () => openNftDetail(edition));
                 card.innerHTML = `
                     <div class="nft-card-img">
                         <img src="build/images/${edition}.png" alt="PlayDog #${edition}" loading="lazy">
                     </div>
                     <div class="nft-card-info">
                         <div class="nft-card-name">PlayDog #${edition}</div>
-                        <div class="nft-card-breed">${attrs["Breed"] || "Unknown"} · ${attrs["Skin Style"] || "Normal"}</div>
+                        <div class="nft-card-breed">${attrs["Breed"] || "Unknown"} · ${(attrs["Skin Style"] || "Normal").replace(" (Standard)", "").replace(" Skin", "")}</div>
                     </div>
                     <div class="nft-card-footer" style="justify-content: center;">
                         <div class="nft-card-price"><i class="fa-brands fa-ethereum"></i> 5 ETH</div>
@@ -1195,23 +1496,25 @@
         }
 
         function renderFallback() {
-            for (let i = 1; i <= 12; i++) {
+            fallbackMetadata.forEach(nft => {
                 const card = document.createElement("div");
                 card.className = "nft-card";
+                card.style.cursor = "pointer";
+                card.addEventListener("click", () => openNftDetail(nft.edition));
                 card.innerHTML = `
                     <div class="nft-card-img">
-                        <img src="build/images/${i}.png" alt="PlayDog #${i}" loading="lazy">
+                        <img src="build/images/${nft.edition}.png" alt="PlayDog #${nft.edition}" loading="lazy">
                     </div>
                     <div class="nft-card-info">
-                        <div class="nft-card-name">PlayDog #${i}</div>
-                        <div class="nft-card-breed">Breed · Normal</div>
+                        <div class="nft-card-name">PlayDog #${nft.edition}</div>
+                        <div class="nft-card-breed">${nft.breed} · ${nft.skin}</div>
                     </div>
                     <div class="nft-card-footer" style="justify-content: center;">
                         <div class="nft-card-price"><i class="fa-brands fa-ethereum"></i> 5 ETH</div>
                     </div>
                 `;
                 nftGrid.appendChild(card);
-            }
+            });
             document.getElementById("load-more-btn").style.display = "none";
         }
 
