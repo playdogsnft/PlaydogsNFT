@@ -10,7 +10,7 @@
     <!-- Open Graph / Twitter Card -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="PlayDogs — 10,000 Unique Pixel Dog NFTs">
-    <meta property="og:description" content="Collect one of 10,000 unique procedurally generated pixel art dogs on Ethereum. 20 breeds, rare skins, legendary traits.">
+    <meta property="og:description" content="Collect one of 10,000 unique procedurally generated pixel art dogs on Ethereum. 20 breeds, 5 skin styles, and 30+ accessories.">
     <meta property="og:image" content="build/images/1.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PlayDogs — 10,000 Unique Pixel Dog NFTs">
@@ -571,20 +571,7 @@
             font-weight: 500;
             color: var(--green);
         }
-        .rarity-pill {
-            font-size: 0.65rem;
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: var(--radius-full);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .rarity-common { background: rgba(113,113,122,0.12); color: var(--text-muted); }
-        .rarity-uncommon { background: rgba(34,197,94,0.1); color: var(--green); }
-        .rarity-rare { background: rgba(99,102,241,0.1); color: var(--accent-light); }
-        .rarity-super-rare { background: rgba(234,179,8,0.1); color: var(--gold); }
-        .rarity-legendary { background: rgba(249,115,22,0.1); color: var(--orange); }
-        .rarity-mythic { background: rgba(236,72,153,0.1); color: var(--pink); }
+
 
         .load-more {
             display: block;
@@ -605,99 +592,7 @@
             background: rgba(255,255,255,0.03);
         }
 
-        /* ==============================================
-           RARITY
-           ============================================== */
-        .rarity-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-        }
-        .rarity-card {
-            padding: 32px 24px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .rarity-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-hover);
-        }
-        .rarity-card::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-        }
-        .rarity-card.t-common::after { background: var(--text-muted); }
-        .rarity-card.t-rare::after { background: var(--accent-light); }
-        .rarity-card.t-legendary::after { background: var(--orange); }
 
-        .rarity-card-emoji { font-size: 2.2rem; margin-bottom: 12px; }
-        .rarity-card-name {
-            font-family: var(--font-heading);
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 6px;
-        }
-        .t-common .rarity-card-name { color: var(--text-muted); }
-        .t-rare .rarity-card-name { color: var(--accent-light); }
-        .t-legendary .rarity-card-name { color: var(--orange); }
-
-        .rarity-card-pct {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-        }
-        .rarity-card-breeds {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Skin types */
-        .skins-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-top: 48px;
-        }
-        @media (max-width: 600px) {
-            .skins-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        .skin-card {
-            padding: 20px 12px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .skin-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-        .skin-circle {
-            width: 48px; height: 48px;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-            border: 2px solid var(--border);
-        }
-        .skin-name {
-            font-family: var(--font-heading);
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-        .skin-pct {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-muted);
-        }
 
         /* ==============================================
            ROADMAP
@@ -937,7 +832,7 @@
     <nav class="nav" id="navbar">
         <div class="nav-inner">
             <a href="#hero" class="nav-logo">
-                <img src="discord_icon_128.png" alt="PlayDogs Logo" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover;">
+                <img src="logo.png" alt="PlayDogs Logo" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; image-rendering: pixelated;">
                 PlayDogs
             </a>
             <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
@@ -946,10 +841,8 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#collection">Collection</a></li>
-                <li><a href="#rarity">Rarity</a></li>
                 <li><a href="#roadmap">Roadmap</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="studio.html">Dog Lab</a></li>
             </ul>
             <div class="nav-actions">
                 <a href="#collection" class="btn btn-outline"><i class="fa-solid fa-compass"></i> Explore</a>
@@ -975,9 +868,6 @@
                 <div class="hero-buttons">
                     <a href="#collection" class="btn btn-primary">
                         <i class="fa-solid fa-grid-2"></i> View Collection
-                    </a>
-                    <a href="studio.html" class="btn btn-outline">
-                        <i class="fa-solid fa-flask"></i> Try Dog Lab
                     </a>
                 </div>
                 <div class="hero-showcase" id="hero-showcase">
@@ -1070,83 +960,12 @@
                 <p class="section-desc">Every PlayDog is unique. Explore real dogs from our 10,000-piece collection.</p>
             </div>
 
-            <div class="gallery-filters reveal">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="common">Common</button>
-                <button class="filter-btn" data-filter="rare">Rare</button>
-                <button class="filter-btn" data-filter="legendary">Legendary</button>
-            </div>
-
-            <div class="nft-grid reveal" id="nft-grid"></div>
+            <div class="nft-grid reveal" id="nft-grid" style="margin-top: 32px;"></div>
 
             <button class="load-more reveal" id="load-more-btn">
                 Load More
             </button>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ===== RARITY ===== -->
-    <section id="rarity">
-        <div class="container">
-            <div class="section-header center reveal">
-                <div class="section-label">Rarity System</div>
-                <h2 class="section-title">Not All Dogs Are Equal</h2>
-                <p class="section-desc">Each breed falls into a rarity tier — from common Golden Retrievers to the mythic Cane Corso.</p>
-            </div>
-
-            <div class="rarity-grid reveal">
-                <div class="rarity-card t-common">
-                    <div class="rarity-card-emoji">🐕</div>
-                    <div class="rarity-card-name">Common</div>
-                    <div class="rarity-card-pct">5% — 10%</div>
-                    <div class="rarity-card-breeds">Golden Retriever, Labrador, Shiba Inu, Husky, German Shepherd, Beagle, Corgi, Pug, Rottweiler, Pitbull, Bulldog</div>
-                </div>
-                <div class="rarity-card t-rare">
-                    <div class="rarity-card-emoji">⚡</div>
-                    <div class="rarity-card-name">Rare</div>
-                    <div class="rarity-card-pct">2% — 4%</div>
-                    <div class="rarity-card-breeds">Border Collie, Doberman, Samoyed, Pomeranian, Dalmatian, Great Dane</div>
-                </div>
-                <div class="rarity-card t-legendary">
-                    <div class="rarity-card-emoji">🔥</div>
-                    <div class="rarity-card-name">Legendary</div>
-                    <div class="rarity-card-pct">0.5% — 1.5%</div>
-                    <div class="rarity-card-breeds">Akita, Chihuahua, Cane Corso</div>
-                </div>
-            </div>
-
-            <h3 class="reveal" style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; text-align: center; margin-top: 48px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em;">Skin Types</h3>
-            <div class="skins-grid reveal">
-                <div class="skin-card">
-                    <div class="skin-circle" style="background: linear-gradient(135deg, #c4a882, #8b6f47);"></div>
-                    <div class="skin-name">Normal</div>
-                    <div class="skin-pct">70%</div>
-                </div>
-                <div class="skin-card">
-                    <div class="skin-circle" style="background: linear-gradient(135deg, #ffd700, #cc8800);"></div>
-                    <div class="skin-name">Gold</div>
-                    <div class="skin-pct">15%</div>
-                </div>
-                <div class="skin-card">
-                    <div class="skin-circle" style="background: linear-gradient(135deg, #5a8a5a, #2d4a2d);"></div>
-                    <div class="skin-name">Zombie</div>
-                    <div class="skin-pct">8%</div>
-                </div>
-                <div class="skin-card">
-                    <div class="skin-circle" style="background: linear-gradient(135deg, #9d4edd, #3a1f7a);"></div>
-                    <div class="skin-name">Alien</div>
-                    <div class="skin-pct">5%</div>
-                </div>
-                <div class="skin-card">
-                    <div class="skin-circle" style="background: linear-gradient(135deg, #c0c0c0, #606060);"></div>
-                    <div class="skin-name">Robot</div>
-                    <div class="skin-pct">2%</div>
-                </div>
-            </div>
-        </div>
-    </section>
+     <div class="divider"></div>   </section>
 
     <div class="divider"></div>
 
@@ -1174,11 +993,11 @@
                 <div class="rm-item active">
                     <div class="rm-phase">Phase 2 — Q3</div>
                     <div class="rm-title">🏆 The Kennel Club</div>
-                    <div class="rm-desc">Holder-exclusive Discord channels. PlayDogs merchandise store with YOUR dog printed on it. Rarity tools, leaderboard, and profile picture generator.</div>
+                    <div class="rm-desc">Holder-exclusive forums. PlayDogs merchandise store with YOUR dog printed on it, leaderboard, and profile picture generator.</div>
                     <div class="rm-tags">
                         <span class="rm-tag">Merch Store</span>
                         <span class="rm-tag">Holder Perks</span>
-                        <span class="rm-tag">Rarity Tools</span>
+                        <span class="rm-tag">PFP Generator</span>
                     </div>
                 </div>
                 <div class="rm-item">
@@ -1233,10 +1052,7 @@
                     <div class="faq-q">What blockchain are PlayDogs on? <i class="fa-solid fa-chevron-down"></i></div>
                     <div class="faq-a">PlayDogs live on the Ethereum mainnet as ERC-721 tokens. The smart contract also implements EIP-2981 for on-chain royalty enforcement (4% on secondary sales).</div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-q">How is rarity determined? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-a">Each PlayDog's rarity is calculated based on its breed probability, skin type rarity, and accessory combination. Rarer breeds combined with rare skins and accessories create the most valuable dogs.</div>
-                </div>
+
                 <div class="faq-item">
                     <div class="faq-q">How can I verify authenticity? <i class="fa-solid fa-chevron-down"></i></div>
                     <div class="faq-a">We publish a SHA-256 Provenance Hash that covers all 10,000 images. Each image was individually hashed, concatenated in order, and hashed again. This immutable hash proves no images were swapped or modified after generation.</div>
@@ -1269,7 +1085,7 @@
         <div class="container">
             <div class="footer-inner">
                 <div class="footer-logo">
-                    <img src="discord_icon_128.png" alt="PlayDogs Logo" style="width: 24px; height: 24px; border-radius: 6px; margin-right: 8px; object-fit: cover;">
+                    <img src="logo.png" alt="PlayDogs Logo" style="width: 24px; height: 24px; border-radius: 6px; margin-right: 8px; object-fit: cover; image-rendering: pixelated;">
                     PlayDogs
                 </div>
                 <div class="footer-copy">© 2026 PlayDogs. All rights reserved.</div>
@@ -1348,26 +1164,16 @@
             }
         }
 
-        function getRarityClass(rarity) {
-            if (!rarity) return "common";
-            const r = rarity.toLowerCase();
-            if (r.includes("mythic") || r.includes("legendary")) return "legendary";
-            if (r.includes("super") || r.includes("epic") || r.includes("rare")) return "rare";
-            return "common";
-        }
-
         function renderBatch() {
             const end = Math.min(displayCount + BATCH, allNfts.length);
             for (let i = displayCount; i < end; i++) {
                 const nft = allNfts[i];
                 const attrs = {};
                 (nft.attributes || []).forEach(a => { attrs[a.trait_type] = a.value; });
-                const rClass = getRarityClass(attrs["Rarity Class"]);
                 const edition = nft.edition || (i + 1);
 
                 const card = document.createElement("div");
                 card.className = "nft-card";
-                card.dataset.rarity = rClass;
                 card.innerHTML = `
                     <div class="nft-card-img">
                         <img src="build/images/${edition}.png" alt="PlayDog #${edition}" loading="lazy">
@@ -1376,9 +1182,8 @@
                         <div class="nft-card-name">PlayDog #${edition}</div>
                         <div class="nft-card-breed">${attrs["Breed"] || "Unknown"} · ${attrs["Skin Style"] || "Normal"}</div>
                     </div>
-                    <div class="nft-card-footer">
+                    <div class="nft-card-footer" style="justify-content: center;">
                         <div class="nft-card-price"><i class="fa-brands fa-ethereum"></i> 5 ETH</div>
-                        <div class="rarity-pill rarity-${rClass}">${rClass.toUpperCase()}</div>
                     </div>
                 `;
                 nftGrid.appendChild(card);
@@ -1393,7 +1198,6 @@
             for (let i = 1; i <= 12; i++) {
                 const card = document.createElement("div");
                 card.className = "nft-card";
-                card.dataset.rarity = "common";
                 card.innerHTML = `
                     <div class="nft-card-img">
                         <img src="build/images/${i}.png" alt="PlayDog #${i}" loading="lazy">
@@ -1402,9 +1206,8 @@
                         <div class="nft-card-name">PlayDog #${i}</div>
                         <div class="nft-card-breed">Breed · Normal</div>
                     </div>
-                    <div class="nft-card-footer">
+                    <div class="nft-card-footer" style="justify-content: center;">
                         <div class="nft-card-price"><i class="fa-brands fa-ethereum"></i> 5 ETH</div>
-                        <div class="rarity-pill rarity-common">COMMON</div>
                     </div>
                 `;
                 nftGrid.appendChild(card);
@@ -1417,17 +1220,7 @@
         // Load more
         document.getElementById("load-more-btn").addEventListener("click", renderBatch);
 
-        // Filter buttons
-        document.querySelectorAll(".filter-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                const filter = btn.dataset.filter;
-                document.querySelectorAll(".nft-card").forEach(card => {
-                    card.style.display = (filter === "all" || card.dataset.rarity === filter) ? "" : "none";
-                });
-            });
-        });
+
 
         // --- FAQ Accordion ---
         document.querySelectorAll(".faq-item").forEach(item => {
